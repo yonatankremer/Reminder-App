@@ -1,0 +1,4 @@
+ - sync and compare the time stored in Reminder to real time DONE
+ - add ability to add multiple reminders
+ - add OS-wide popup notifications
+ - add a basic gui

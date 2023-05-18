@@ -1,7 +1,7 @@
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Scanner;
-import java.util.Calendar;
-import java.time.*;
 
 public class Reminder {
 
@@ -13,7 +13,8 @@ public class Reminder {
 
     private String message;
 
-    public Reminder (int year, int month, int day, int hour, int minute, String message) {
+    //main constructor
+    private Reminder (int year, int month, int day, int hour, int minute, String message) {
         this.year = year;
         this.month = month;
         this.day = day;
@@ -26,13 +27,7 @@ public class Reminder {
         this.message = message;
     }
 
-
-    //copy contructor
-
-    //default constructor
-
-
-    public static Reminder creatReminder() {
+    public static Reminder createReminder() {
         Scanner in = new Scanner(System.in);
 
         System.out.println("enter the desired year: ");
@@ -45,22 +40,52 @@ public class Reminder {
         int hour = in.nextInt();
         System.out.println("enter the desired minute: ");
         int minute = in.nextInt();
+        in.nextLine();
         System.out.println("enter the desired message: ");
         String message = in.nextLine();
-
         in.close();
         
         return new Reminder(year, month, day, hour, minute, message);
     }
+    
+    
+    //copy contructor
 
-    public void remind() {}
+    private Reminder(Reminder r) {
+    this.year = r.getYear();
+    this.month = r.getMonth();
+        this.day = r.getDay();
+        this.hour = r.getHour();
+        this.minute = r.getMinute();
 
-    public boolean isNotif(LocalDateTime l) {
-        if (ldt.equals(l))
-            return true;
-            return false;
+        this.date = LocalDate.of(year, month, day);
+        this.time = LocalTime.of(hour, minute, 0);
+        this.ldt = LocalDateTime.of(date, time);
+        this.message = r.message;
+    }
+    
+    public static Reminder duplicateReminder(Reminder r) {
+        return new Reminder(r);
+    }
+
+    public void remind() {
+        System.out.println("Your "+time+" set reminder: "+message);
+    }
+
+    public boolean isRemind(LocalDateTime l) {
+        if (ldt.equals(l)) {
+            //System.out.println("isRemind == true"); utility purposes
+            return true; }
+        else {
+            //System.out.println("isRemind == false");
+            return false; }
         }
          
+
+
+
+    //getters+setters
+
 
 
     public int getYear() {
