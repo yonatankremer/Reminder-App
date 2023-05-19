@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 public class Reminder {
 
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_YELLOW = "\u001B[33m";
+
     private int year, month, day, hour, minute; //used for storage and copy construction
 
     private LocalDate date;
@@ -43,7 +47,9 @@ public class Reminder {
         in.nextLine();
         System.out.println("enter the desired message: ");
         String message = in.nextLine();
-        in.close();
+
+        System.out.println(ANSI_GREEN+"Reminder created successfully!"+ANSI_RESET);
+        System.out.println();
         
         return new Reminder(year, month, day, hour, minute, message);
     }
@@ -69,7 +75,7 @@ public class Reminder {
     }
 
     public void remind() {
-        System.out.println("Your "+time+" set reminder: "+message);
+        System.out.println(ANSI_YELLOW+"Your "+time+" set reminder: "+message+ANSI_RESET);
     }
 
     public boolean isRemind(LocalDateTime l) {
